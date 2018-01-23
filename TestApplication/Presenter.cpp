@@ -14,8 +14,6 @@
 // Used it because it's a simple two-file dependency.
 #include "tinyxml2.h"
 
-#define HISTORY_DEPTH 7
-
 // *********************
 //    Initialization.
 // *********************
@@ -71,9 +69,6 @@ void CPresenter::Do(std::shared_ptr<CAction> action)
 
 	m_actionsToUndo.push_back(action);
 	m_actionsToRedo.clear(); // NOTE _doing_ something destroys our Redo queue
-
-	if (m_actionsToUndo.size() > HISTORY_DEPTH)
-		m_actionsToUndo.pop_front();
 
 	m_nativeView->Refresh();
 }
