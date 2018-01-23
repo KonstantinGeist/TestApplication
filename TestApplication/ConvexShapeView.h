@@ -4,7 +4,7 @@
 
 #include "ShapeView.h"
 
-class CDocumentView;
+class IDocumentView;
 
 // The parent of basic shapes such as triangles, ellipses and rectangles.
 class CConvexShapeView: public IShapeView
@@ -12,7 +12,7 @@ class CConvexShapeView: public IShapeView
 public:
 	CConvexShapeView();
 	
-	virtual void InitInstance(CDocumentView* docView) override;
+	virtual void InitInstance(IDocumentView* docView) override;
 	virtual bool HitTest(const CPoint& p) const override;
 	virtual CRect GetRect() const override;
 	virtual void SetRect(const CRect& rect) override;

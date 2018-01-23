@@ -33,13 +33,13 @@ void CPresenter::RegisterShapeMapper(std::unique_ptr<IShapeMapper> mapper)
 	m_shapeMappers[mapper->GetTypeName()] = std::move(mapper);
 }
 
-void CPresenter::SetDocumentView(std::shared_ptr<CDocumentView> docView)
+void CPresenter::SetDocumentView(std::shared_ptr<IDocumentView> docView)
 {
 	m_docView = docView;
 	m_docView->SetEventHandler(this);
 }
 
-void CPresenter::SetDocumentModel(std::shared_ptr<CDocumentModel> docModel)
+void CPresenter::SetDocumentModel(std::shared_ptr<IDocumentModel> docModel)
 {
 	m_docModel = docModel;
 
@@ -226,7 +226,7 @@ void CPresenter::viewToModel()
 // Implements IDocumentViewEventHandler
 // ************************************
 
-void CPresenter::OnDocumentViewChange(CDocumentView* /*docView*/)
+void CPresenter::OnDocumentViewChange(IDocumentView* /*docView*/)
 {
 	if (!m_docViewChangeEnabled)
 		return;
@@ -237,36 +237,36 @@ void CPresenter::OnDocumentViewChange(CDocumentView* /*docView*/)
 	m_nativeDocument->SetModified(true);
 }
 
-void CPresenter::OnBeginShapeViewDrag(CDocumentView* /*docView*/)
+void CPresenter::OnBeginShapeViewDrag(IDocumentView* /*docView*/)
 {
 	assert(m_nativeView);
 	m_nativeView->SetHandCursor();
 	m_nativeView->SetCapture(true);
 }
 
-void CPresenter::OnEndShapeViewDrag(CDocumentView* /*docView*/)
+void CPresenter::OnEndShapeViewDrag(IDocumentView* /*docView*/)
 {
 	assert(m_nativeView);
 	m_nativeView->SetDefaultCursor();
 	m_nativeView->SetCapture(false);
 }
 
-void CPresenter::OnBeginMarkerHover(CDocumentView* docView)
+void CPresenter::OnBeginMarkerHover(IDocumentView* docView)
 {
 	m_nativeView->SetMarkerCursor(docView->GetCurrentMarkerCursor());
 }
 
-void CPresenter::OnEndMarkerHover(CDocumentView* docView)
+void CPresenter::OnEndMarkerHover(IDocumentView* docView)
 {
 	m_nativeView->SetDefaultCursor();
 }
 
-void CPresenter::OnBeginMarkerDrag(CDocumentView* docView)
+void CPresenter::OnBeginMarkerDrag(IDocumentView* docView)
 {
 	m_nativeView->SetCapture(true);
 }
 
-void CPresenter::OnEndMarkerDrag(CDocumentView* docView)
+void CPresenter::OnEndMarkerDrag(IDocumentView* docView)
 {
 	m_nativeView->SetCapture(false);
 }

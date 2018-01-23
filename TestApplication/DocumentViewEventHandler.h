@@ -2,9 +2,9 @@
 
 #pragma once
 
-class CDocumentView;
+class IDocumentView;
 
-// Generates CDocumentView-related events. Such events can be reported
+// Generates IDocumentView-related events. Such events can be reported
 // back to Presenter to update native (MFC) view (or anything else).
 // TODO The interface can be more elaborate, uses what's exactly required
 // at this point.
@@ -12,24 +12,24 @@ class IDocumentViewEventHandler
 {
 public:
 	// Called whenever shape views of the document view change.
-	virtual void OnDocumentViewChange(CDocumentView* docView) = 0;
+	virtual void OnDocumentViewChange(IDocumentView* docView) = 0;
 
 	// Called when shape dragging begins.
-	virtual void OnBeginShapeViewDrag(CDocumentView* docView) = 0;
+	virtual void OnBeginShapeViewDrag(IDocumentView* docView) = 0;
 
 	// Called when shape dragging ends.
-	virtual void OnEndShapeViewDrag(CDocumentView* docView) = 0;
+	virtual void OnEndShapeViewDrag(IDocumentView* docView) = 0;
 
 	// Called when hovering over a marker.
-	virtual void OnBeginMarkerHover(CDocumentView* docView) = 0;
+	virtual void OnBeginMarkerHover(IDocumentView* docView) = 0;
 
 	// Called when hovering over a marker ended.
-	virtual void OnEndMarkerHover(CDocumentView* docView) = 0;
+	virtual void OnEndMarkerHover(IDocumentView* docView) = 0;
 
 	// Called when marker drag begins.
-	virtual void OnBeginMarkerDrag(CDocumentView* docView) = 0;
+	virtual void OnBeginMarkerDrag(IDocumentView* docView) = 0;
 
 	// Called when marker drag ends.
-	virtual void OnEndMarkerDrag(CDocumentView* docView) = 0;
+	virtual void OnEndMarkerDrag(IDocumentView* docView) = 0;
 };
 

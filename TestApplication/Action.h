@@ -16,16 +16,16 @@ class CAction
 public:
 	// Returns false if the action was cancelled mid-through and should not
 	// be registered in the history.
-	virtual bool Do(CDocumentView* docView) = 0;
+	virtual bool Do(IDocumentView* docView) = 0;
 
 	// Defined same as ::Do(..) but some actions may require a Redo(..)
 	// different from ::Do(..)
-	virtual void Redo(CDocumentView* docView)
+	virtual void Redo(IDocumentView* docView)
 	{
 		this->Do(docView);
 	}
 
-	virtual void Undo(CDocumentView* docView) = 0;
+	virtual void Undo(IDocumentView* docView) = 0;
 };
 
 // Base class for adding shapes of different types.
@@ -33,7 +33,7 @@ template <class V>
 class CAddAction final: public CAction
 {
 public:
-	virtual bool Do(CDocumentView* docView) override
+	virtual bool Do(IDocumentView* docView) override
 	{
 		m_shapeView = std::make_shared<V>();
 		m_shapeView->InitInstance(docView);
@@ -43,13 +43,13 @@ public:
 		return true;
 	}
 
-	virtual void Redo(CDocumentView* docView) override
+	virtual void Redo(IDocumentView* docView) override
 	{
 		docView->AddShapeView(m_shapeView);
 		docView->Select(m_shapeView);
 	}
 
-	virtual void Undo(CDocumentView* docView) override
+	virtual void Undo(IDocumentView* docView) override
 	{
 		docView->RemoveShapeView(m_shapeView);
 	}
@@ -64,9 +64,9 @@ class CEndDragAction final : public CAction
 public:
 	CEndDragAction(const CPoint& dragEndPosition);
 
-	virtual bool Do(CDocumentView* docView) override;
-	virtual void Redo(CDocumentView* docView) override;
-	virtual void Undo(CDocumentView* docView) override;
+	virtual bool Do(IDocumentView* docView) override;
+	virtual void Redo(IDocumentView* docView) override;
+	virtual void Undo(IDocumentView* docView) override;
 
 private:
 	CPoint m_dragStartPosition, m_dragEndPosition;
@@ -80,9 +80,9 @@ class CDeleteAction final : public CAction
 public:
 	CDeleteAction();
 
-	virtual bool Do(CDocumentView* docView) override;
-	virtual void Redo(CDocumentView* docView) override;
-	virtual void Undo(CDocumentView* docView) override;
+	virtual bool Do(IDocumentView* docView) override;
+	virtual void Redo(IDocumentView* docView) override;
+	virtual void Undo(IDocumentView* docView) override;
 
 private:
 	std::shared_ptr<IShapeView> m_shapeView;

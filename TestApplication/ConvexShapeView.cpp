@@ -10,7 +10,7 @@ CConvexShapeView::CConvexShapeView()
 {
 }
 
-void CConvexShapeView::InitInstance(CDocumentView* docView)
+void CConvexShapeView::InitInstance(IDocumentView* docView)
 {
 	const CRect rect(docView->GetRect());
 

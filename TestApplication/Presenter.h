@@ -27,10 +27,10 @@ public:
 	CPresenter();
 
 	// Binds the presenter to a document model object.
-	void SetDocumentModel(std::shared_ptr<CDocumentModel> docModel);
+	void SetDocumentModel(std::shared_ptr<IDocumentModel> docModel);
 
 	// Binds the presenter to a document view object.
-	void SetDocumentView(std::shared_ptr<CDocumentView> docView);
+	void SetDocumentView(std::shared_ptr<IDocumentView> docView);
 
 	// Connects to the native view (such as CView) to report changes back to it.
 	void SetNativeView(INativeView* nativeView);
@@ -100,20 +100,20 @@ private:
 
 	// Implements the IDocumentViewEventHandler interface to respond to changes
 	// in the document view.
-	virtual void OnDocumentViewChange(CDocumentView* docView) override;
-	virtual void OnBeginShapeViewDrag(CDocumentView* docView) override;
-	virtual void OnEndShapeViewDrag(CDocumentView* docView) override;
-	virtual void OnBeginMarkerHover(CDocumentView* docView) override;
-	virtual void OnEndMarkerHover(CDocumentView* docView) override;
-	virtual void OnBeginMarkerDrag(CDocumentView* docView) override;
-	virtual void OnEndMarkerDrag(CDocumentView* docView) override;
+	virtual void OnDocumentViewChange(IDocumentView* docView) override;
+	virtual void OnBeginShapeViewDrag(IDocumentView* docView) override;
+	virtual void OnEndShapeViewDrag(IDocumentView* docView) override;
+	virtual void OnBeginMarkerHover(IDocumentView* docView) override;
+	virtual void OnEndMarkerHover(IDocumentView* docView) override;
+	virtual void OnBeginMarkerDrag(IDocumentView* docView) override;
+	virtual void OnEndMarkerDrag(IDocumentView* docView) override;
 
 // Fields
 private:
 	// TODO can be moved to pimpl
 
-	std::shared_ptr<CDocumentModel> m_docModel;
-	std::shared_ptr<CDocumentView> m_docView;
+	std::shared_ptr<IDocumentModel> m_docModel;
+	std::shared_ptr<IDocumentView> m_docView;
 	INativeView* m_nativeView;
 	INativeDocument* m_nativeDocument;
 

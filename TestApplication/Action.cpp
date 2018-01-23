@@ -13,7 +13,7 @@ CEndDragAction::CEndDragAction(const CPoint& dragEndPosition)
 
 }
 
-bool CEndDragAction::Do(CDocumentView* docView)
+bool CEndDragAction::Do(IDocumentView* docView)
 {
 	bool b = docView->EndDrag(m_dragEndPosition);
 	if (b)
@@ -27,7 +27,7 @@ bool CEndDragAction::Do(CDocumentView* docView)
 	return b;
 }
 
-void CEndDragAction::Redo(CDocumentView* docView)
+void CEndDragAction::Redo(IDocumentView* docView)
 {
 	assert(m_shapeView);
 
@@ -49,7 +49,7 @@ void CEndDragAction::Redo(CDocumentView* docView)
 	docView->MarkChanged();
 }
 
-void CEndDragAction::Undo(CDocumentView* docView)
+void CEndDragAction::Undo(IDocumentView* docView)
 {
 	if (m_curMarkerIndex == -1)
 	{
@@ -78,19 +78,19 @@ CDeleteAction::CDeleteAction()
 {
 }
 
-bool CDeleteAction::Do(CDocumentView* docView)
+bool CDeleteAction::Do(IDocumentView* docView)
 {
 	m_shapeView = docView->RemoveSelected(&m_index);
 	return m_shapeView != nullptr;
 }
 
-void CDeleteAction::Redo(CDocumentView* docView)
+void CDeleteAction::Redo(IDocumentView* docView)
 {
 	assert(m_index != -1);
 	docView->RemoveShapeViewAt(m_index);
 }
 
-void CDeleteAction::Undo(CDocumentView* docView)
+void CDeleteAction::Undo(IDocumentView* docView)
 {
 	assert(m_shapeView && m_index != -1);
 	docView->InsertShapeView(m_shapeView, m_index);

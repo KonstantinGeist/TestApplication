@@ -28,7 +28,7 @@ class IShapeView
 public:
 	// Must be called during creation to correctly align it to
 	// the center of the working area.
-	virtual void InitInstance(class CDocumentView* docView) = 0;
+	virtual void InitInstance(class IDocumentView* docView) = 0;
 
 	// Should return true if the point is found inside the shape.
 	virtual bool HitTest(const CPoint& p) const = 0;
