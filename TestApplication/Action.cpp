@@ -4,34 +4,6 @@
 #include "Action.h"
 
 // ******************
-//   CSelectAction
-// ******************
-
-CSelectAction::CSelectAction(const CPoint& p)
-	: m_p(p)
-{
-}
-
-bool CSelectAction::Do(CDocumentView* docView)
-{
-	m_prevSelection = docView->GetSelected();
-	bool b = docView->Select(m_p);
-	if (b)
-		m_newSelection = docView->GetSelected();
-	return b;
-}
-
-void CSelectAction::Redo(CDocumentView* docView)
-{
-	docView->Select(m_newSelection);
-}
-
-void CSelectAction::Undo(CDocumentView* docView)
-{
-	docView->Select(m_prevSelection);
-}
-
-// ******************
 //   CEndDragAction
 // ******************
 
@@ -72,6 +44,8 @@ void CEndDragAction::Redo(CDocumentView* docView)
 		m_shapeView->SetMarkerPosition(m_curMarkerIndex, m_dragEndPosition);
 	}
 
+	docView->Select(m_shapeView);
+
 	docView->MarkChanged();
 }
 
@@ -90,6 +64,8 @@ void CEndDragAction::Undo(CDocumentView* docView)
 		m_shapeView->SetMarkerPosition(m_curMarkerIndex, m_dragStartPosition);
 	}
 
+	docView->Select(m_shapeView);
+
 	docView->MarkChanged();
 }
 
@@ -98,17 +74,13 @@ void CEndDragAction::Undo(CDocumentView* docView)
 // ******************
 
 CDeleteAction::CDeleteAction()
-	: m_index(-1), m_wasSelected(false)
+	: m_index(-1)
 {
 }
 
 bool CDeleteAction::Do(CDocumentView* docView)
 {
-	auto selected = docView->GetSelected();
 	m_shapeView = docView->RemoveSelected(&m_index);
-	// Selection is implicitly unset when an object is deleted.
-	// We must restore it in Redo(..)
-	m_wasSelected = m_shapeView == selected;
 	return m_shapeView != nullptr;
 }
 
@@ -123,6 +95,5 @@ void CDeleteAction::Undo(CDocumentView* docView)
 	assert(m_shapeView && m_index != -1);
 	docView->InsertShapeView(m_shapeView, m_index);
 
-	if (m_wasSelected)
-		docView->Select(m_shapeView);
+	docView->Select(m_shapeView);
 }

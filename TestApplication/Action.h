@@ -46,6 +46,7 @@ public:
 	virtual void Redo(CDocumentView* docView) override
 	{
 		docView->AddShapeView(m_shapeView);
+		docView->Select(m_shapeView);
 	}
 
 	virtual void Undo(CDocumentView* docView) override
@@ -55,21 +56,6 @@ public:
 
 private:
 	std::shared_ptr<V> m_shapeView;
-};
-
-// Select event.
-class CSelectAction final : public CAction
-{
-public:
-	CSelectAction(const CPoint& p);
-
-	virtual bool Do(CDocumentView* docView) override;
-	virtual void Redo(CDocumentView* docView) override;
-	virtual void Undo(CDocumentView* docView) override;
-
-private:
-	const CPoint m_p;
-	std::shared_ptr<IShapeView> m_newSelection, m_prevSelection;
 };
 
 // End drag event.
@@ -101,5 +87,4 @@ public:
 private:
 	std::shared_ptr<IShapeView> m_shapeView;
 	int m_index;
-	bool m_wasSelected;
 };

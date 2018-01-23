@@ -81,7 +81,6 @@ public:
 	// Undoable actions that are added to history (prefix Do-).
 
 	void DoDelete();
-	void DoSelect(const CPoint& p);
 	void DoAddRectangle();
 	void DoAddTriangle();
 	void DoAddEllipse();
@@ -89,6 +88,7 @@ public:
 
 	// Actions that by-pass history: dragging, hovering etc.
 
+	void Select(const CPoint& p);
 	void Drag(const CPoint& p);
 	void Hover(const CPoint& p);
 

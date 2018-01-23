@@ -154,9 +154,10 @@ void CPresenter::DoAddEllipse()
 	Do(std::make_shared<CAddAction<CEllipseView>>());
 }
 
-void CPresenter::DoSelect(const CPoint& p)
+void CPresenter::Select(const CPoint& p)
 {
-	Do(std::make_shared<CSelectAction>(p));
+	if (m_docView->Select(p))
+		m_nativeView->Refresh();
 }
 
 void CPresenter::Drag(const CPoint& p)
