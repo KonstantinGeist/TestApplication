@@ -96,10 +96,14 @@ bool CDocumentView::Select(const CPoint& p)
 		// Selecting a shape.
 
 		std::shared_ptr<IShapeView> newSelection;
-		for (auto shapeView : m_shapeViews)
+		for (auto it = m_shapeViews.rbegin(); it != m_shapeViews.rend(); ++it)
 		{
+			auto shapeView = *it;
 			if (shapeView->HitTest(p))
+			{
 				newSelection = shapeView;
+				break;
+			}
 		}
 
 		if (newSelection)
