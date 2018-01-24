@@ -93,6 +93,8 @@ public:
 	void Hover(const CPoint& p);
 
 private:
+	const CUndoContext getUndoContext() const;
+
 	// Updates the view with the data from the model.
 	void modelToView();
 	// Updates the model with the data from the view.

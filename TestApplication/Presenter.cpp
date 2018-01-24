@@ -60,11 +60,19 @@ void CPresenter::SetNativeDocument(INativeDocument* nativeDocument)
 //      Undo/Redo.
 // *********************
 
+const CUndoContext CPresenter::getUndoContext() const
+{
+	assert(m_docView);
+	return CUndoContext(m_docView.get());
+}
+
 void CPresenter::Do(std::shared_ptr<CAction> action)
 {
 	assert(m_docModel);
 
-	if (!action->Do(m_docView.get()))
+	const CUndoContext ctx (getUndoContext());
+
+	if (!action->Do(ctx))
 		return; // cancelled mid-through
 
 	m_actionsToUndo.push_back(action);
@@ -83,7 +91,8 @@ bool CPresenter::Undo()
 	auto action = m_actionsToUndo.back();
 	m_actionsToUndo.pop_back();
 
-	action->Undo(m_docView.get());
+	const CUndoContext ctx (getUndoContext());
+	action->Undo(ctx);
 	m_actionsToRedo.push_back(action);
 
 	m_nativeView->Refresh();
@@ -101,7 +110,8 @@ bool CPresenter::Redo()
 	auto action = m_actionsToRedo.back();
 	m_actionsToRedo.pop_back();
 
-	action->Redo(m_docView.get());
+	const CUndoContext ctx (getUndoContext());
+	action->Redo(ctx);
 	m_actionsToUndo.push_back(action);
 
 	m_nativeView->Refresh();

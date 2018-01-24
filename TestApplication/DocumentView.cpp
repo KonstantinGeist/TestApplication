@@ -54,7 +54,7 @@ void CDocumentView::RemoveShapeView(std::shared_ptr<IShapeView> shapeView)
 
 void CDocumentView::RemoveShapeViewAt(int index)
 {
-	assert(index >= 0 && index < m_shapeViews.size());
+	assert(index >= 0 && index < (int)m_shapeViews.size());
 
 	auto shapeToRemove = m_shapeViews[index];
 	if (shapeToRemove == m_selShapeView)
