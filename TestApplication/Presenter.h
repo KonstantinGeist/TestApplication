@@ -58,13 +58,6 @@ public:
 	void ClearHistory();
 
 	// *******************
-	//   Shape mappers.
-	// *******************
-
-	// See IShapeMapper for more details.
-	void RegisterShapeMapper(std::unique_ptr<IShapeMapper> mapper);
-
-	// *******************
 	//    Serialization.
 	// *******************
 
@@ -118,8 +111,8 @@ private:
 	std::shared_ptr<IDocumentView> m_docView;
 	INativeView* m_nativeView;
 	INativeDocument* m_nativeDocument;
+	bool m_docViewChangeEnabled;
 
 	std::list<std::shared_ptr<CAction>> m_actionsToRedo, m_actionsToUndo;
-	std::unordered_map<std::string, std::unique_ptr<IShapeMapper>> m_shapeMappers;
-	bool m_docViewChangeEnabled;
+	CShapeMapperCollection m_shapeMappers;
 };

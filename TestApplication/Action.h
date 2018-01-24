@@ -21,6 +21,7 @@ struct CUndoContext
 // This system saves memory but is more error-prone.
 // Another approach could be just take snapshots of the entire model.
 // It depends on what kind of model we have (large/has open handles vs. small).
+// Part of Presenter/Controller.
 class CAction
 {
 public:

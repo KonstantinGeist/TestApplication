@@ -12,6 +12,28 @@
 
 #include "tinyxml2.h"
 
+// ****************************
+
+CShapeMapperCollection::CShapeMapperCollection()
+{
+	// Registers built-in mappers.
+	Register(std::make_unique<CRectangleMapper>());
+	Register(std::make_unique<CTriangleMapper>());
+	Register(std::make_unique<CEllipseMapper>());
+}
+
+void CShapeMapperCollection::Register(std::unique_ptr<IShapeMapper> mapper)
+{
+	m_shapeMappers[mapper->GetTypeName()] = std::move(mapper);
+}
+
+IShapeMapper* CShapeMapperCollection::GetMapper(const std::string& name) const
+{
+	return m_shapeMappers.at(name).get();
+}
+
+// ****************************
+
 static void setCommonAttributes(tinyxml2::XMLElement* r, const CRect& rect)
 {
 	r->SetAttribute("X", rect.left);

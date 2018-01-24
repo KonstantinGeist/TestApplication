@@ -22,15 +22,7 @@ CPresenter::CPresenter()
 	: m_nativeView(nullptr), m_nativeDocument(nullptr),
 	  m_docViewChangeEnabled(true)
 {
-	// Registers built-in mappers.
-	RegisterShapeMapper(std::make_unique<CRectangleMapper>());
-	RegisterShapeMapper(std::make_unique<CTriangleMapper>());
-	RegisterShapeMapper(std::make_unique<CEllipseMapper>());
-}
 
-void CPresenter::RegisterShapeMapper(std::unique_ptr<IShapeMapper> mapper)
-{
-	m_shapeMappers[mapper->GetTypeName()] = std::move(mapper);
 }
 
 void CPresenter::SetDocumentView(std::shared_ptr<IDocumentView> docView)
@@ -71,7 +63,6 @@ void CPresenter::Do(std::shared_ptr<CAction> action)
 	assert(m_docModel);
 
 	const CUndoContext ctx (getUndoContext());
-
 	if (!action->Do(ctx))
 		return; // cancelled mid-through
 
@@ -93,6 +84,7 @@ bool CPresenter::Undo()
 
 	const CUndoContext ctx (getUndoContext());
 	action->Undo(ctx);
+
 	m_actionsToRedo.push_back(action);
 
 	m_nativeView->Refresh();
@@ -112,6 +104,7 @@ bool CPresenter::Redo()
 
 	const CUndoContext ctx (getUndoContext());
 	action->Redo(ctx);
+
 	m_actionsToUndo.push_back(action);
 
 	m_nativeView->Refresh();
@@ -203,10 +196,11 @@ void CPresenter::modelToView()
 	for (auto shape : shapes)
 	{
 		std::string typeName = shape->GetTypeName();
-		auto shapeMapper = m_shapeMappers[typeName].get();
+		auto shapeMapper = m_shapeMappers.GetMapper(typeName);
 
 		auto shapeView = std::shared_ptr<IShapeView>(shapeMapper->ConvertModelToView(shape.get()));
 		assert(shapeView);
+
 		m_docView->AddShapeView(shapeView);
 	}
 
@@ -224,10 +218,11 @@ void CPresenter::viewToModel()
 	for (auto shapeView : shapeViews)
 	{
 		std::string typeName = shapeView->GetTypeName();
-		auto shapeMapper = m_shapeMappers[typeName].get();
+		auto shapeMapper = m_shapeMappers.GetMapper(typeName);
 
 		auto shape = std::shared_ptr<IShape>(shapeMapper->ConvertViewToModel(shapeView.get()));
 		assert(shape);
+
 		m_docModel->AddShape(shape);
 	}
 }
@@ -297,7 +292,7 @@ bool CPresenter::Serialize(const std::string& path)
 	for (const auto shape : shapes)
 	{
 		std::string typeName = shape->GetTypeName();
-		auto shapeMapper = m_shapeMappers[typeName].get();
+		auto shapeMapper = m_shapeMappers.GetMapper(typeName);
 
 		tinyxml2::XMLElement* element = shapeMapper->ConvertModelToXMLElement(shape.get(), xmlDoc);
 		assert(element);
@@ -330,9 +325,11 @@ bool CPresenter::Deserialize(const std::string& path)
 		 e = e->NextSiblingElement())
 	{
 		std::string typeName = e->Name();
-		auto shapeMapper = m_shapeMappers[typeName].get();
+		auto shapeMapper = m_shapeMappers.GetMapper(typeName);
+
 		auto shape = std::shared_ptr<IShape>(shapeMapper->ConvertXMLElementToModel(e));
 		assert(shape);
+
 		m_docModel->AddShape(shape);
 	}
 
