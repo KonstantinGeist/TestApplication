@@ -211,6 +211,7 @@ void CPresenter::viewToModel()
 {
 	// Currently, we simply re-fill the document model on every change.
 	// Theoretically, can be more sophisticated, but is enough for our current task.
+	// See also the comments to IShapeMapper.
 
 	m_docModel->Clear();
 

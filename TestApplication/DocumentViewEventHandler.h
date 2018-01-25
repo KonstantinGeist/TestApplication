@@ -12,24 +12,24 @@ class IDocumentViewEventHandler
 {
 public:
 	// Called whenever shape views of the document view change.
-	virtual void OnDocumentViewChange(IDocumentView* docView) = 0;
+	virtual void OnDocumentViewChange(IDocumentView* docView) { }
 
 	// Called when shape dragging begins.
-	virtual void OnBeginShapeViewDrag(IDocumentView* docView) = 0;
+	virtual void OnBeginShapeViewDrag(IDocumentView* docView) { }
 
 	// Called when shape dragging ends.
-	virtual void OnEndShapeViewDrag(IDocumentView* docView) = 0;
+	virtual void OnEndShapeViewDrag(IDocumentView* docView) { }
 
 	// Called when hovering over a marker.
-	virtual void OnBeginMarkerHover(IDocumentView* docView) = 0;
+	virtual void OnBeginMarkerHover(IDocumentView* docView) { }
 
 	// Called when hovering over a marker ended.
-	virtual void OnEndMarkerHover(IDocumentView* docView) = 0;
+	virtual void OnEndMarkerHover(IDocumentView* docView) { }
 
 	// Called when marker drag begins.
-	virtual void OnBeginMarkerDrag(IDocumentView* docView) = 0;
+	virtual void OnBeginMarkerDrag(IDocumentView* docView) { }
 
 	// Called when marker drag ends.
-	virtual void OnEndMarkerDrag(IDocumentView* docView) = 0;
+	virtual void OnEndMarkerDrag(IDocumentView* docView) { }
 };
 

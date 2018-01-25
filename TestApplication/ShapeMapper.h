@@ -14,6 +14,11 @@ namespace tinyxml2
 // Maps shapes to shape views and vice versa; as well as maps shapes to XML elements
 // and vice versa.
 // Part of Presenter/Controller.
+// TODO This aproach currently treats objects as valuetypes which lack identity, and therefore
+// recreating a model object from a view can lose hidden state not reflected in the view. To fix this,
+// IShapeMapper can have references to entire IDocumentModel/IDocumentView and map existing objects/views
+// (and retrieve them) using unique ID's/names. I don't want shapes and shape views to know each other
+// directly to avoid complex interdependencies. It's saner to map them indirectly by a third party.
 class IShapeMapper
 {
 public:
