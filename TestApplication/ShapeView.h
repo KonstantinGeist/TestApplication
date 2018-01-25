@@ -26,6 +26,8 @@ enum class MarkerCursor
 class IShapeView
 {
 public:
+	virtual ~IShapeView() = default;
+
 	// Must be called during creation to correctly align it to
 	// the center of the working area.
 	virtual void InitInstance(class IDocumentView* docView) = 0;

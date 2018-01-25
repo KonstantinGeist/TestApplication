@@ -22,6 +22,8 @@ namespace tinyxml2
 class IShapeMapper
 {
 public:
+	virtual ~IShapeMapper() = default;
+
 	// The type name we're working with.
 	virtual const std::string GetTypeName() const = 0;
 

@@ -25,6 +25,8 @@ struct CUndoContext
 class CAction
 {
 public:
+	virtual ~CAction() = default;
+
 	// Returns false if the action was cancelled mid-through and should not
 	// be registered in the history.
 	virtual bool Do(const CUndoContext& ctx) = 0;
@@ -77,7 +79,7 @@ private:
 class CEndDragAction final : public CAction
 {
 public:
-	CEndDragAction(const CPoint& dragEndPosition);
+	explicit CEndDragAction(const CPoint& dragEndPosition);
 
 	virtual bool Do(const CUndoContext& ctx) override;
 	virtual void Redo(const CUndoContext& ctx) override;

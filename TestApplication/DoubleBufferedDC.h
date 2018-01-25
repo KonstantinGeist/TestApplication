@@ -4,7 +4,7 @@
 
 // Implements double buffering.
 // TODO the bitmap can be reused IIRC
-class CDoubleBufferedDC : public CDC {
+class CDoubleBufferedDC final : public CDC {
 public:
 	CDoubleBufferedDC(CDC* pDC, const CRect* pRect = NULL);
 	~CDoubleBufferedDC();

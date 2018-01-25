@@ -11,6 +11,8 @@ class IDocumentView;
 class IDocumentViewEventHandler
 {
 public:
+	virtual ~IDocumentViewEventHandler() = default;
+
 	// Called whenever shape views of the document view change.
 	virtual void OnDocumentViewChange(IDocumentView* docView) { }
 

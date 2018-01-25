@@ -11,6 +11,8 @@ class IDocumentViewEventHandler;
 class IDocumentView
 {
 public:
+	virtual ~IDocumentView() = default;
+
 	// See IDocumentViewEventHandler for more details.
 	virtual void SetEventHandler(IDocumentViewEventHandler* handler) = 0;
 

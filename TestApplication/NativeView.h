@@ -10,6 +10,8 @@
 class INativeView
 {
 public:
+	virtual ~INativeView() = default;
+
 	virtual void SetDefaultCursor() = 0;
 	virtual void SetHandCursor() = 0;
 	virtual void SetMarkerCursor(MarkerCursor markerCursor) = 0;

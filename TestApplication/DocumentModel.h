@@ -7,6 +7,8 @@
 class IDocumentModel
 {
 public:
+	virtual ~IDocumentModel() = default;
+
 	virtual void Clear() = 0;
 	virtual void AddShape(std::shared_ptr<IShape> shape) = 0;
 	virtual void RemoveShape(std::shared_ptr<IShape> shape) = 0;

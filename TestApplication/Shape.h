@@ -6,6 +6,8 @@
 class IShape
 {
 public:
+	virtual ~IShape() = default;
+
 	// Poor man's reflection.
 	// TODO Does Visual C++/MFC have something better? Is their RTTI reliable?
 	virtual const std::string GetTypeName() const = 0;
