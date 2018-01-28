@@ -4,12 +4,13 @@
 
 namespace view
 {
-	class IShapeView;
+	class CConcreteShapeViewBase;
 
+	// NOTE Logically belongs to CTestApplicationView
 	class CShapeViewFactory
 	{
 	public:
-		static IShapeView* CreateInstance(const std::string& typeName);
+		static CConcreteShapeViewBase* CreateInstance(const std::string& typeName);
 	};
 
 }

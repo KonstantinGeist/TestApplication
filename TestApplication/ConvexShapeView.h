@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include "IShapeView.h"
+#include "ConcreteShapeViewBase.h"
 
 namespace view
 {
 
-	class CConvexShapeView : public IShapeView
+	class CConvexShapeView : public CConcreteShapeViewBase
 	{
 	public:
 		virtual void SetRect(const CRect& rect) override;

@@ -11,7 +11,7 @@ namespace view
 		return "Rectangle";
 	}
 
-	void CRectangleView::Render(class CDC* pDC)
+	void CRectangleView::Render(CDC* pDC)
 	{
 		CBrush brush(RGB(255, 255, 0));
 		CBrush* pOldBrush = pDC->SelectObject(&brush);

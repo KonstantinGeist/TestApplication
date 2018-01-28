@@ -11,7 +11,7 @@ namespace view
 		return "Ellipse";
 	}
 
-	void CEllipseView::Render(class CDC* pDC)
+	void CEllipseView::Render(CDC* pDC)
 	{
 		CBrush brush(RGB(255, 255, 0));
 		CBrush* pOldBrush = pDC->SelectObject(&brush);

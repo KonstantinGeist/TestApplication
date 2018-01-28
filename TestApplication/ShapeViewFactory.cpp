@@ -9,10 +9,9 @@
 namespace view
 {
 
-	IShapeView* CShapeViewFactory::CreateInstance(const std::string& typeName)
+	CConcreteShapeViewBase* CShapeViewFactory::CreateInstance(const std::string& typeName)
 	{
-		// TODO this factory should belong to a ICanvasView impl so that CDC was
-		// passed to ctor and not exposed in the interfaces (such as Render(CDC* pDC)?
+		// TODO something more clever
 
 		if (typeName == "Triangle")
 			return new CTriangleView();

@@ -9,8 +9,9 @@ namespace view
 
 	class CRectangleView : public CConvexShapeView
 	{
+	public:
 		virtual std::string GetTypeName() const override;
-		virtual void Render(class CDC* pDC) override;
+		virtual void Render(CDC* pDC) override;
 	};
 
 }

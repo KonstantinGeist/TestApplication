@@ -11,7 +11,7 @@ namespace view
 		return "Triangle";
 	}
 
-	void CTriangleView::Render(class CDC* pDC)
+	void CTriangleView::Render(CDC* pDC)
 	{
 		CBrush brush(RGB(255, 255, 0));
 		CBrush* pOldBrush = pDC->SelectObject(&brush);
