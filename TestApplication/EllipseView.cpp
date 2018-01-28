@@ -1,33 +1,17 @@
 // Copyright (C) The Company
 
 #include "stdafx.h"
-
 #include "EllipseView.h"
 
-const std::string CEllipseView::GetTypeName() const
+namespace view
 {
-	return "Ellipse";
-}
 
-bool CEllipseView::HitTest(const CPoint& p) const
-{
-	const CRect rc(GetRect());
+	std::string CEllipseView::GetTypeName() const
+	{
+		return "Ellipse";
+	}
 
-	// Determine radii.
-	double a = (rc.right - rc.left) / 2;
-	double b = (rc.bottom - rc.top) / 2;
-
-	// Determine x, y.
-	double x = p.x - (rc.left + rc.right) / 2;
-	double y = p.y - (rc.top + rc.bottom) / 2;
-
-	// Apply ellipse formula.
-	return ((x * x) / (a * a) + (y * y) / (b * b) <= 1);
-}
-
-void CEllipseView::Render(CDC* pDC, ShapeViewLayer layer)
-{
-	if (layer == ShapeViewLayer::Default)
+	void CEllipseView::Render(class CDC* pDC)
 	{
 		CBrush brush(RGB(255, 255, 0));
 		CBrush* pOldBrush = pDC->SelectObject(&brush);
@@ -42,5 +26,4 @@ void CEllipseView::Render(CDC* pDC, ShapeViewLayer layer)
 		pDC->SelectObject(pOldPen);
 	}
 
-	CConvexShapeView::Render(pDC, layer);
 }

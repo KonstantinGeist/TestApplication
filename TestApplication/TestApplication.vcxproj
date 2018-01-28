@@ -185,24 +185,28 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="Ellipse.h" />
-    <ClInclude Include="NativeDocument.h" />
-    <ClInclude Include="ShapeMapper.h" />
-    <ClInclude Include="NativeView.h" />
+    <ClInclude Include="AddShapeCommand.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="CanvasPresentation.h" />
+    <ClInclude Include="CanvasPresenter.h" />
+    <ClInclude Include="ConcreteMarker.h" />
+    <ClInclude Include="ConcreteMarkerView.h" />
     <ClInclude Include="ConvexShapeView.h" />
-    <ClInclude Include="DocumentViewEventHandler.h" />
     <ClInclude Include="DoubleBufferedDC.h" />
-    <ClInclude Include="EllipseView.h" />
-    <ClInclude Include="DocumentModel.h" />
-    <ClInclude Include="DocumentView.h" />
-    <ClInclude Include="Presenter.h" />
+    <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="ICanvas.h" />
+    <ClInclude Include="ICanvasView.h" />
+    <ClInclude Include="IMarker.h" />
+    <ClInclude Include="IMarkerView.h" />
+    <ClInclude Include="IResizeMarkerUpdater.h" />
+    <ClInclude Include="IShape.h" />
+    <ClInclude Include="IShapeSelector.h" />
+    <ClInclude Include="IShapeView.h" />
     <ClInclude Include="MainFrm.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RectangleView.h" />
+    <ClInclude Include="MarkerPresenter.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="ShapeView.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RemoveShapeCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestApplication.h" />
@@ -211,18 +215,36 @@
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TriangleView.h" />
+    <ClInclude Include="RectangleView.h" />
+    <ClInclude Include="EllipseView.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapePresentation.h" />
+    <ClInclude Include="ShapeFactory.h" />
+    <ClInclude Include="ShapePresenter.h" />
+    <ClInclude Include="ShapeViewFactory.h" />
+    <ClInclude Include="SetShapeRectCommand.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AddShapeCommand.cpp" />
+    <ClCompile Include="AbstractCommand.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="CanvasPresentation.cpp" />
+    <ClCompile Include="CanvasPresenter.cpp" />
+    <ClCompile Include="ConcreteMarker.cpp" />
+    <ClCompile Include="ConcreteMarkerView.cpp" />
     <ClCompile Include="ConvexShapeView.cpp" />
-    <ClCompile Include="DocumentModel.cpp" />
-    <ClCompile Include="DocumentView.cpp" />
     <ClCompile Include="DoubleBufferedDC.cpp" />
-    <ClCompile Include="EllipseView.cpp" />
-    <ClCompile Include="Presenter.cpp" />
+    <ClCompile Include="History.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="RectangleView.cpp" />
-    <ClCompile Include="ShapeMapper.cpp" />
+    <ClCompile Include="MarkerPresenter.cpp" />
+    <ClCompile Include="RemoveShapeCommand.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="ShapeFactory.cpp" />
+    <ClCompile Include="ShapePresenter.cpp" />
+    <ClCompile Include="ShapeViewFactory.cpp" />
+    <ClCompile Include="ShapePresentation.cpp" />
+    <ClCompile Include="CanvasSerializer.cpp" />
+    <ClCompile Include="SetShapeRectCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -233,7 +255,11 @@
     <ClCompile Include="TestApplicationDoc.cpp" />
     <ClCompile Include="TestApplicationView.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="TriangleView.cpp" />
+    <ClCompile Include="RectangleView.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="EllipseView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestApplication.rc" />

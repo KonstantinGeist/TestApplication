@@ -4,11 +4,14 @@
 
 #include "Shape.h"
 
-class CEllipse : public CConvexShape
+namespace domain_model
 {
-public:
-	virtual const std::string GetTypeName() const override
+
+	class CEllipse : public CShape
 	{
-		return "Ellipse";
-	}
-};
+	public:
+		virtual std::string GetTypeName() const override;
+		virtual bool ContainsPoint(const CPoint& p) const override;
+	};
+
+}

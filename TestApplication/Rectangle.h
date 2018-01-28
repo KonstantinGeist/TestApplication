@@ -4,11 +4,16 @@
 
 #include "Shape.h"
 
-class CRectangle final : public CConvexShape
+namespace domain_model
 {
-public:
-	virtual const std::string GetTypeName() const override
+
+	class CRectangle : public CShape
 	{
-		return "Rectangle";
-	}
-};
+	public:
+		virtual std::string GetTypeName() const override
+		{
+			return "Rectangle";
+		}
+	};
+
+}

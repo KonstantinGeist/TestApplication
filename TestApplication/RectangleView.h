@@ -4,9 +4,13 @@
 
 #include "ConvexShapeView.h"
 
-class CRectangleView final: public CConvexShapeView
+namespace view
 {
-public:
-	virtual const std::string GetTypeName() const override;
-	virtual void Render(CDC* pDC, ShapeViewLayer layer)  override;
-};
+
+	class CRectangleView : public CConvexShapeView
+	{
+		virtual std::string GetTypeName() const override;
+		virtual void Render(class CDC* pDC) override;
+	};
+
+}

@@ -1,22 +1,24 @@
-#include "stdafx.h"
+// Copyright (C) The Company
 
+#include "stdafx.h"
 #include "RectangleView.h"
 
-const std::string CRectangleView::GetTypeName() const
+namespace view
 {
-	return "Rectangle";
-}
 
-void CRectangleView::Render(CDC* pDC, ShapeViewLayer layer)
-{
-	if (layer == ShapeViewLayer::Default)
+	std::string CRectangleView::GetTypeName() const
+	{
+		return "Rectangle";
+	}
+
+	void CRectangleView::Render(class CDC* pDC)
 	{
 		CBrush brush(RGB(255, 255, 0));
 		CBrush* pOldBrush = pDC->SelectObject(&brush);
 
-		CPen penBlack;
-		penBlack.CreatePen(PS_SOLID, 3, RGB(255, 66, 0));
-		CPen* pOldPen = pDC->SelectObject(&penBlack);
+		CPen pen;
+		pen.CreatePen(PS_SOLID, 3, RGB(255, 66, 0));
+		CPen* pOldPen = pDC->SelectObject(&pen);
 
 		pDC->Rectangle(GetRect());
 
@@ -24,5 +26,4 @@ void CRectangleView::Render(CDC* pDC, ShapeViewLayer layer)
 		pDC->SelectObject(pOldPen);
 	}
 
-	CConvexShapeView::Render(pDC, layer);
 }
